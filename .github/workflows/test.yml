@@ -1,0 +1,22 @@
+name: Publish release
+
+on:
+    workflow_dispatch:
+    push:
+
+permissions:
+    contents: write
+
+jobs:
+    release-npm:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Use supported Node.js Version
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  registry-url: "https://registry.npmjs.org"
+            - name: Update npm
+              run: npm install -g npm@11.11.1
